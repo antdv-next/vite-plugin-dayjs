@@ -20,13 +20,15 @@
     "build": "tsdown",
     "preview": "vite preview",
     "test": "vitest run",
-    "prepublish": "pnpm build"
+    "prepublish": "pnpm build",
+    "bump": "bumpp"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
     "@types/node": "^24.10.1",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.8.1",
+    "bumpp": "^10.3.2",
     "dayjs": "^1.11.19",
     "eslint": "^9.39.2",
     "jiti": "^2.6.1",
