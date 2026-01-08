@@ -27,6 +27,7 @@ yarn add vite-plugin-dayjs -D
 
 # pnpm
 pnpm add vite-plugin-dayjs -D
+
 ```
 
 ## 🚀 使用

@@ -16,7 +16,7 @@ A Vite plugin that automatically converts Day.js CommonJS imports to ESM format 
 - 💪 **TypeScript**: Full TypeScript support
 - ⚡ **Zero Config**: Works out of the box, no configuration needed
 
-## 📦 安装
+## 📦 Install
 
 ```bash
 # npm
@@ -27,11 +27,12 @@ yarn add vite-plugin-dayjs -D
 
 # pnpm
 pnpm add vite-plugin-dayjs -D
-```Usage
+
+```
+
+## Usage
 
 Add the plugin to your `vite.config.ts`:
-
-在 `vite.config.ts` 中添加插件：
 
 ```ts
 import { defineConfig } from 'vite'
@@ -42,9 +43,9 @@ export default defineConfig({
     vitePluginDayjs(),
   ],
 })
-Then use Day.js as usual:
+```
 
-然后正常使用 Day.js：
+Then use Day.js as usual:
 
 ```ts
 import dayjs from 'dayjs'
