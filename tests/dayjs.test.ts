@@ -10,6 +10,9 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
 import { describe, expect, it } from 'vitest'
+// 测试多语言包的不同导入写法
+import 'dayjs/locale/zh-cn'
+import 'dayjs/locale/es.js'
 
 describe('day.js', () => {
   it('should parse and format dates correctly', () => {
@@ -99,5 +102,57 @@ describe('dayjs type declarations', () => {
     expect(typeof utc).toBe('function')
     expect(typeof timezone).toBe('function')
     expect(typeof isBetween).toBe('function')
+  })
+})
+
+describe('dayjs locale support', () => {
+  it('should handle Chinese locale (bare import)', () => {
+    dayjs.extend(relativeTime)
+
+    const now = dayjs()
+    const pastDate = now.subtract(3, 'days')
+
+    // 切换到中文语言
+    const result = pastDate.locale('zh-cn').fromNow()
+    expect(result).toBe('3 天前')
+  })
+
+  it('should handle Spanish locale (.js import)', () => {
+    dayjs.extend(relativeTime)
+
+    const now = dayjs()
+    const pastDate = now.subtract(5, 'days')
+
+    // 切换到西班牙语
+    const result = pastDate.locale('es').fromNow()
+    expect(result).toBe('hace 5 días')
+  })
+
+  it('should format dates with Chinese locale', () => {
+    const date = dayjs('2024-06-15').locale('zh-cn')
+    expect(date.format('MMMM')).toBe('六月')
+    expect(date.format('dddd')).toBe('星期六')
+  })
+
+  it('should format dates with Spanish locale', () => {
+    const date = dayjs('2024-06-15').locale('es')
+    expect(date.format('MMMM')).toBe('junio')
+    expect(date.format('dddd')).toBe('sábado')
+  })
+
+  it('should switch between different locales', () => {
+    dayjs.extend(relativeTime)
+
+    const now = dayjs()
+    const pastDate = now.subtract(2, 'hours')
+
+    // 英文
+    expect(pastDate.locale('en').fromNow()).toBe('2 hours ago')
+
+    // 中文
+    expect(pastDate.locale('zh-cn').fromNow()).toBe('2 小时前')
+
+    // 西班牙语
+    expect(pastDate.locale('es').fromNow()).toBe('hace 2 horas')
   })
 })

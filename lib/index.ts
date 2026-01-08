@@ -29,6 +29,19 @@ export function vitePluginDayjs(): Plugin {
         return await this.resolve(target, importer, { skipSelf: true, ...options })
       }
 
+      // 4) 处理多语言包
+      //    - dayjs/locale/xxx.js          -> dayjs/esm/locale/xxx.js
+      const localeWithJs = source.match(/^dayjs\/locale\/([^/]+)\.js$/)
+      if (localeWithJs) {
+        const target = `dayjs/esm/locale/${localeWithJs[1]}.js`
+        return await this.resolve(target, importer, { skipSelf: true, ...options })
+      }
+      const localeBare = source.match(/^dayjs\/locale\/([^/]+)$/)
+      if (localeBare) {
+        const target = `dayjs/esm/locale/${localeBare[1]}`
+        return await this.resolve(target, importer, { skipSelf: true, ...options })
+      }
+
       return null
     },
   }
